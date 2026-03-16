@@ -268,7 +268,7 @@ export function discoverSkills(config = {}) {
     const installedPlugins = loadInstalledPlugins();
     const skillLock = loadSkillLock();
     for (const { path: loc, source } of defaultScanLocations(cwd)) {
-      if (source === 'standalone') {
+      if (source === 'standalone' || source === 'user-manual') {
         scanFlatDirWithLock(loc, source, seen, ignored, skillLock);
       } else {
         scanFlatDir(loc, source, seen, ignored);
