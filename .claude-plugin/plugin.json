@@ -1,0 +1,31 @@
+{
+  "name": "skill-manager",
+  "version": "0.1.0",
+  "description": "Audit and fix your Claude Code skills — detect conflicts, bloat, outdated patterns, and available updates. Free structural analysis with opt-in deep LLM review.",
+  "author": {
+    "name": "VersoXBT",
+    "url": "https://github.com/VersoXBT"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VersoXBT/skill-manager"
+  },
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "claude-code-plugin",
+    "skills",
+    "skill-audit",
+    "skill-quality",
+    "plugin-manager",
+    "audit",
+    "lint",
+    "quality",
+    "conflicts",
+    "duplicates",
+    "updates",
+    "maintenance",
+    "context-window",
+    "token-optimization"
+  ]
+}
