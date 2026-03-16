@@ -6,8 +6,10 @@
 
 ## Install
 
+Run in your terminal:
+
 ```bash
-claude plugin add VersoXBT/skill-manager
+claude plugin install skill-manager@skill-manager
 ```
 
 ## Usage
