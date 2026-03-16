@@ -1,7 +1,7 @@
 {
   "name": "skill-manager",
-  "version": "0.1.0",
-  "description": "Audit and fix your Claude Code skills — detect conflicts, bloat, outdated patterns, and available updates. Free structural analysis with opt-in deep LLM review.",
+  "version": "0.2.0",
+  "description": "See all your installed skills, their sources, structural issues, and available updates.",
   "author": {
     "name": "VersoXBT",
     "url": "https://github.com/VersoXBT"
@@ -13,16 +13,9 @@
     "claude-code-plugin",
     "skills",
     "skill-audit",
-    "skill-quality",
     "plugin-manager",
     "audit",
-    "lint",
-    "quality",
-    "conflicts",
-    "duplicates",
     "updates",
-    "maintenance",
-    "context-window",
-    "token-optimization"
+    "inventory"
   ]
 }

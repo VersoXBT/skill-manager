@@ -1,85 +1,46 @@
 ---
-description: Audit all installed skills for quality, freshness, conflicts, and updates
-argument-hint: [--fix] [--verbose] [--deep] [--json] [--no-update]
+description: Show all installed skills, their sources, structure issues, and available updates
+argument-hint: [--fix] [--json] [--no-update]
 allowed-tools: ["Bash", "Read", "Write", "Edit", "Glob", "Grep", "Agent"]
 ---
 
 # Skill Check
 
-Run a comprehensive audit of all installed Claude Code skills.
+Show the user everything they have installed and flag anything that needs attention.
 
-## Step 1: Run Full Audit
-
-Execute the skill-manager analysis engine:
+## Step 1: Run the audit
 
 ```bash
 node "${CLAUDE_PLUGIN_ROOT}/scripts/index.js" check $ARGUMENTS
 ```
 
-Parse and present the output. The report includes:
-- Health score (0-100) with letter grade
-- Findings grouped by severity
-- Updates available for plugins and standalone skills
-- Token budget overview
+## Step 2: Present the results
 
-## Step 2: Deep Analysis (only if --deep flag present)
+The script outputs a markdown report. Present it to the user with these additions:
 
-If `$ARGUMENTS` contains `--deep`:
-
-1. Re-run with `--json` to get structured data
-2. For each skill with critical/high findings, dispatch the `skill-analyzer` agent
-3. Present deep analysis alongside the Tier 1 report
-
-Before starting, inform the user about message cost and ask for confirmation.
+1. **Group skills by category** — look at each skill's name and description and group them (e.g. backend, frontend, blockchain, testing, devops, security, ai/ml, workflow, tooling, coding, etc.). Use your judgement.
+2. **Show the full inventory** — every skill with its description, source, and token count
+3. **Summarize structure issues** — don't list every "missing version" individually, just say "X skills missing version field" and list the ones with real problems (missing frontmatter, empty files)
+4. **Show available updates** clearly
 
 ## Step 3: Fix Mode (only if --fix flag present)
 
 If `$ARGUMENTS` contains `--fix`:
 
-1. Run with `--json --fix` to get fixable findings:
+1. Run with `--json --fix`:
    ```bash
    node "${CLAUDE_PLUGIN_ROOT}/scripts/index.js" check --json --fix $ARGUMENTS
    ```
 
-2. Parse the JSON output. Present the fix plan grouped by skill:
-   - Number of auto-fixable issues
-   - What each fix does
-   - Which files will be modified
-   - Plugin issues that CANNOT be fixed (report count only)
-
-3. Ask for user confirmation before proceeding.
-
+2. Present the fix plan — what will be fixed, which files
+3. Ask for confirmation
 4. Apply fixes using the Edit tool:
-
-   ### STRUCT-002 (No frontmatter)
-   Add minimal YAML frontmatter:
-   ```yaml
-   ---
-   name: skill-name
-   description: TODO - add a description
-   version: 0.1.0
-   ---
-   ```
-
-   ### STRUCT-003 (Missing name)
-   Add `name` field derived from the skill's directory name.
-
-   ### STRUCT-005 (Missing version)
-   Add `version: 0.1.0` to existing frontmatter.
-
-5. After applying, re-run audit to show before/after score comparison.
+   - **STRUCT-002**: Add minimal frontmatter (name, description placeholder, version)
+   - **STRUCT-003**: Add name field from directory name
+   - **STRUCT-005**: Add `version: 0.1.0`
+5. Re-run audit to show before/after
 
 ## Protection Rules
 
-- **Plugin skills** (everything-claude-code, superpowers, feature-dev, etc.): NEVER modify. Report only. Suggest `claude plugin update <name>`.
-- **Anthropic official skills** (skill-creator, code-review, figma, context7, etc.): NEVER modify. Report only.
-- **Standalone skills from external repos**: NEVER modify. Report only.
-- **User-created skills** (`~/.claude/skills/` non-symlink, `.claude/skills/`): CAN be fixed.
-- **Size guard**: Content rewrites (not structural fixes) are capped at 20% size increase.
-
-## Important Notes
-
-- Without --fix, this audit is **read-only**
-- Token estimates use charCount/4 approximation (+/-20% variance)
-- Update checks require network access (use --no-update for offline mode)
-- Use `--verbose` for raw similarity scores and update check details
+- **Plugin/official skills**: NEVER modify. Report only. Suggest `claude plugin update <name>`.
+- **User-created skills** (`~/.claude/skills/` non-symlink): CAN be fixed.

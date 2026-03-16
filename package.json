@@ -1,7 +1,7 @@
 {
   "name": "skill-manager",
-  "version": "0.1.0",
-  "description": "Claude Code plugin that audits installed skills for quality, freshness, conflicts, and updates",
+  "version": "0.2.0",
+  "description": "Claude Code plugin that shows all your installed skills, their sources, structural issues, and available updates",
   "type": "module",
   "main": "scripts/index.js",
   "scripts": {

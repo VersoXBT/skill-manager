@@ -33,12 +33,10 @@ describe('cache', () => {
 
     const report = {
       generatedAt: new Date().toISOString(),
-      version: '0.1.0',
-      healthScore: 92,
-      grade: 'A',
+      version: '0.2.0',
       skills: [],
-      findings: [],
-      summary: { critical: 0, high: 0, medium: 0, low: 0, info: 0 },
+      issues: [],
+      updates: [],
       config: {},
     }
 
@@ -72,7 +70,7 @@ describe('cache', () => {
     const dataDir = await makeTempDir()
     tempDirs.push(dataDir)
 
-    const report = { healthScore: 100 }
+    const report = { skills: [], issues: [] }
     saveAudit(report, { dataDir })
 
     // Verify it was saved
