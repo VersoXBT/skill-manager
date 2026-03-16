@@ -3,6 +3,12 @@
  * Outputs a clean inventory + issues list. Claude handles presentation.
  */
 
+import { execSync } from 'node:child_process'
+import { join } from 'node:path'
+import { homedir } from 'node:os'
+
+const HOME = homedir()
+
 const MARKETPLACE_LABELS = {
   'claude-plugins-official': 'official',
   'everything-claude-code': 'everything-cc',
@@ -17,6 +23,23 @@ function extractRepoShort(url) {
   return match ? match[1] : null
 }
 
+/** Get git remote URL for a marketplace directory. Cached per marketplace. */
+const marketplaceRemoteCache = new Map()
+function getMarketplaceRemote(marketplace) {
+  if (!marketplace) return null
+  if (marketplaceRemoteCache.has(marketplace)) return marketplaceRemoteCache.get(marketplace)
+  try {
+    const mpDir = join(HOME, '.claude', 'plugins', 'marketplaces', marketplace)
+    const url = execSync('git remote get-url origin', { cwd: mpDir, encoding: 'utf8', timeout: 3000 }).trim()
+    const short = extractRepoShort(url)
+    marketplaceRemoteCache.set(marketplace, short)
+    return short
+  } catch {
+    marketplaceRemoteCache.set(marketplace, null)
+    return null
+  }
+}
+
 /** Format source label for display. */
 function formatSource(skill) {
   if (skill.source === 'user-manual') return 'manual'
@@ -29,11 +52,16 @@ function formatSource(skill) {
   return 'plugin'
 }
 
-/** Format repo short link for non-plugin/non-official skills. */
+/**
+ * Resolve repo short link for any skill.
+ * Checks: repositoryUrl (plugin.json) → sourceUrl (skill-lock) → marketplace git remote.
+ */
 function formatRepo(skill) {
-  if (skill.source === 'plugin-cache' || skill.source === 'plugin-marketplace') return ''
-  const repo = extractRepoShort(skill.sourceUrl)
-  return repo ?? ''
+  const fromRepo = extractRepoShort(skill.repositoryUrl)
+  if (fromRepo) return fromRepo
+  const fromSource = extractRepoShort(skill.sourceUrl)
+  if (fromSource) return fromSource
+  return getMarketplaceRemote(skill.marketplace) ?? ''
 }
 
 /**

@@ -5,7 +5,7 @@ description: >
   "skill manager", "check my skills", "skill audit", "what skills do I have",
   "skill updates", "newer version", "outdated plugins", or wants to know
   what's installed and where it comes from.
-version: 0.2.0
+version: 0.3.0
 ---
 
 # Skill Auditing
@@ -26,7 +26,8 @@ Fix structural issues (user-owned skills only):
 
 ## What It Shows
 
-- **Full inventory** of every skill with description, source, and token count
+- **Full inventory** of every skill with description, source, repo link, and token count
+- **GitHub repo links** for every skill — resolved from plugin.json, skill-lock, or marketplace git remote
 - **Structure issues** — missing frontmatter fields (name, description, version)
 - **Available updates** — checks GitHub for newer versions of plugins and standalone skills
 

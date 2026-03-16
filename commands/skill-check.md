@@ -19,7 +19,7 @@ node "${CLAUDE_PLUGIN_ROOT}/scripts/index.js" check $ARGUMENTS
 The script outputs a markdown report. Present it to the user with these additions:
 
 1. **Group skills by category** — look at each skill's name and description and group them (e.g. backend, frontend, blockchain, testing, devops, security, ai/ml, workflow, tooling, coding, etc.). Use your judgement.
-2. **Show the full inventory** — every skill with its description, source, and token count
+2. **Show the full inventory** — every skill with its description, source, GitHub repo (user/repo short link), and token count. The Repo column is resolved automatically from plugin.json, skill-lock, or marketplace git remotes.
 3. **Summarize structure issues** — don't list every "missing version" individually, just say "X skills missing version field" and list the ones with real problems (missing frontmatter, empty files)
 4. **Show available updates** clearly
 
