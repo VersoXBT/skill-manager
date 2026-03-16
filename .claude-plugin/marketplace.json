@@ -1,0 +1,24 @@
+{
+  "name": "skill-manager",
+  "owner": {
+    "name": "VersoXBT"
+  },
+  "plugins": [
+    {
+      "name": "skill-manager",
+      "source": "./",
+      "description": "Audit & fix your Claude Code skills — detect conflicts, bloat, outdated patterns, and available updates",
+      "category": "workflow",
+      "tags": [
+        "skills",
+        "audit",
+        "quality",
+        "updates",
+        "maintenance",
+        "plugin-manager",
+        "context-window",
+        "linter"
+      ]
+    }
+  ]
+}
