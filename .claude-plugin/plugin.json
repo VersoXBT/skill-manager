@@ -1,6 +1,6 @@
 {
   "name": "skill-manager",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "See all your installed skills, their sources, structural issues, and available updates.",
   "author": {
     "name": "VersoXBT",
