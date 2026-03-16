@@ -10,6 +10,13 @@ const MARKETPLACE_LABELS = {
   'claude-initial-setup': 'claude-setup',
 }
 
+/** Extract short GitHub repo link (user/repo) from a URL. */
+function extractRepoShort(url) {
+  if (!url) return null
+  const match = url.match(/github\.com\/([^/]+\/[^/]+?)(?:\.git)?(?:\/|$)/)
+  return match ? match[1] : null
+}
+
 /** Format source label for display. */
 function formatSource(skill) {
   if (skill.source === 'user-manual') return 'manual'
@@ -20,6 +27,13 @@ function formatSource(skill) {
   if (mp) return mp.replace(/-marketplace$/, '')
   if (skill.sourcePlugin) return skill.sourcePlugin
   return 'plugin'
+}
+
+/** Format repo short link for non-plugin/non-official skills. */
+function formatRepo(skill) {
+  if (skill.source === 'plugin-cache' || skill.source === 'plugin-marketplace') return ''
+  const repo = extractRepoShort(skill.sourceUrl)
+  return repo ?? ''
 }
 
 /**
@@ -39,13 +53,14 @@ export function formatReport(report) {
   // Skills Inventory
   lines.push('## Skills')
   lines.push('')
-  lines.push('| Skill | Description | Source | Tokens |')
-  lines.push('|-------|-------------|--------|--------|')
+  lines.push('| Skill | Description | Source | Repo | Tokens |')
+  lines.push('|-------|-------------|--------|------|--------|')
   for (const skill of skills) {
     const desc = skill.frontmatter?.description ?? ''
     const truncated = desc.length > 60 ? desc.slice(0, 57) + '...' : desc
     const source = formatSource(skill)
-    lines.push(`| ${skill.name} | ${truncated} | ${source} | ~${skill.estimatedTokens} |`)
+    const repo = formatRepo(skill)
+    lines.push(`| ${skill.name} | ${truncated} | ${source} | ${repo} | ~${skill.estimatedTokens} |`)
   }
   lines.push('')
 

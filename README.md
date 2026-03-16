@@ -30,11 +30,28 @@ claude plugin install skill-manager@skill-manager
 
 ## What It Does
 
-1. **Inventory** — Lists every skill with its description, source (official, everything-cc, superpowers, manual, standalone), and token count
+1. **Inventory** — Lists every skill with description, source, GitHub repo link, and token count
 2. **Structure checks** — Validates frontmatter (name, description, version)
 3. **Update checks** — Queries GitHub for newer versions of plugins and standalone skills
 
-Claude groups your skills by category (backend, frontend, blockchain, testing, etc.) and presents everything in a readable format.
+Claude groups your skills by category and presents a clean report:
+
+```
+## Skills
+| Skill       | Description                        | Source     | Repo                | Tokens |
+|-------------|------------------------------------|------------|---------------------|--------|
+| fastapi     | Build Python APIs with FastAPI...  | manual     |                     | ~6808  |
+| helius      | Build Solana apps with Helius...   | standalone | sendaifun/skills    | ~2715  |
+| find-skills | Discover installable agent skills  | standalone | vercel-labs/skills  | ~1157  |
+| tdd-workflow| TDD with 80%+ coverage             | everything-cc |                  | ~2406  |
+
+## Structure Issues
+- 2 skills missing frontmatter entirely
+- 88 skills missing version field
+
+## Updates Available
+- azure-ai: newer version available (2026-02-26 → 2026-03-14)
+```
 
 ## Auto-Fix (`--fix`)
 
