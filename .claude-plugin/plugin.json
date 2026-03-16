@@ -6,10 +6,7 @@
     "name": "VersoXBT",
     "url": "https://github.com/VersoXBT"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/VersoXBT/skill-manager"
-  },
+  "repository": "https://github.com/VersoXBT/skill-manager",
   "license": "MIT",
   "keywords": [
     "claude-code",
