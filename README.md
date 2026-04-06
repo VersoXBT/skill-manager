@@ -1,3 +1,11 @@
+<div align="center">
+
+[![Stars](https://img.shields.io/github/stars/VersoXBT/skill-manager?style=flat-square&logo=github&label=Stars)](https://github.com/VersoXBT/skill-manager)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
+[![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-Plugin-blueviolet?style=flat-square&logo=anthropic)](https://claude.ai/code)
+
+</div>
+
 # skill-manager — See Everything You Have Installed
 
 > Know what skills, plugins, and agents you're running. See where they come from, what needs fixing, and what has updates.
@@ -92,3 +100,14 @@ Uses `gh` CLI (authenticated, 5000 req/hr) with `fetch()` fallback (60 req/hr). 
 ## License
 
 MIT
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/VersoXBT"><img src="https://avatars.githubusercontent.com/u/202813801?v=4" width="80px;" alt=""/><br /><sub><b>VersoXBT</b></sub></a><br />💻 📖</td>
+    <td align="center"><a href="https://github.com/claude"><img src="https://avatars.githubusercontent.com/u/81847?v=4" width="80px;" alt=""/><br /><sub><b>Claude</b></sub></a><br />🤖 💡</td>
+  </tr>
+</table>
+<!-- ALL-CONTRIBUTORS-LIST:END -->
